@@ -1,3 +1,5 @@
+import time
+
 from selenium import webdriver
 from pages.login_page import LoginPage
 import pytest
@@ -19,7 +21,7 @@ class TestLogin:
         self.driver = setup
         self.driver.get(self.baseurl)
         act = self.driver.title
-        if act == "OrangeRM":
+        if act == "OrangeHRM":
             assert True
             self.driver.close()
             self.logger.info("******loin__001__test passed ")
@@ -31,6 +33,7 @@ class TestLogin:
             self.logger.error("******loin__001__test failed ")
             assert False
 
+
     def test_002_login(self, setup):
         self.logger.info("******loin__002__test started ")
 
@@ -40,8 +43,11 @@ class TestLogin:
         lp.send_username(self.username)
         lp.send_password(self.password)
         lp.login_button()
+        time.sleep(4)
+        lp.logout_user()
+        print(self.driver.title)
         self.driver.close()
-        self.logger.info("******loin__001__test passed ")
+        self.logger.info("******loin__002__test passed ")
 
 
 
